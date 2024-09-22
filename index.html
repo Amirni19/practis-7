@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pole{
+        width: 150px;
+        height: 250px;
+        background-color: green;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+    }
+    #ball{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      transition: all 1s;
+    }
+</style>
+<body> 
+    <input type="text" onclick="alert('click')" class="inp"> 
+    <button id="btn" onclick="counter()" class="btn">Кнопка</button> 
+ 
+    <input type="button" onclick="this.hidden=true" value="Нажмите кнопку"> 
+    <input type="button" id="hider" value="Нажмите" /> 
+ 
+  <div id="text">Текст</div> 
+
+  <div class="pole">
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball">............................................................
+    ...................................................................................................................
+    ...................................................................................................................
+    ............................ 
+  </div>
+ 
+    <script> 
+         function counter(){ 
+            for(let i=0; i<3; i++){ 
+            alert(i); 
+            } 
+        } 
+        btn.onclick = function(){ 
+        alert('click'); 
+        } 
+ 
+        document.getElementById('hider').onclick = function() { 
+      document.getElementById('text').hidden = true; 
+    } 
+
+    pole.onclick = function(event) {
+let fieldCoords = this.getBoundingClientRect();
+let ballCoords = {
+  top: event.clientY - fieldCoords.top - pole.clientTop - ball.clientHeight / 2,
+  left: event.clientX - fieldCoords.left - pole.clientLeft - ball.clientWidth / 2
+};
+if (ballCoords.top < 0) ballCoords.top = 0;
+if (ballCoords.left < 0) ballCoords.left = 0;
+if (ballCoords.left + ball.clientWidth > pole.clientWidth) {
+  ballCoords.left = pole.clientWidth - ball.clientWidth;
+}
+if (ballCoords.top + ball.clientHeight > pole.clientHeight) {
+  ballCoords.top = pole.clientHeight - ball.clientHeight;
+}
+ball.style.left = ballCoords.left + 'px';
+ball.style.top = ballCoords.top + 'px';
+}
+    </script> 
+</body>
+</html>
